@@ -19,7 +19,7 @@ class PermanentEmp extends Employee{
 	int paid_leave, sick_leave, casual_leave,balance_leave,leave_taken,total_leave_entitlement,leave_adjusted,avail_leaves;
 	double basic_salary, hra,pf,total_salary;
 	
-	public PermanentEmp(double basic_salary,String empName,int empId,int paid_leave,int sick_leave,int casual_leave,int total_leave_entitlement,int leave_adjusted)
+	public PermanentEmp(double pf,double hra,double basic_salary,String empName,int avail_leaves,int empId,int paid_leave,int sick_leave,int casual_leave,int total_leave_entitlement,int leave_adjusted)
 	{	
 		this.empName = empName;
 		this.empId = empId; 
@@ -29,11 +29,14 @@ class PermanentEmp extends Employee{
 		this.total_leave_entitlement = total_leave_entitlement;
 		this.leave_adjusted = leave_adjusted;
 		this.basic_salary = basic_salary;
+		this.avail_leaves = avail_leaves;
+		this.pf = pf;
+		this.hra = hra;
 	}
 	@Override
 	void calculate_balance_leaves() {
 		// TODO Auto-generated method stub
-		
+		this.leave_taken = this.sick_leave+this.casual_leave+this.paid_leave;
 		this.balance_leave = this.total_leave_entitlement - this.leave_taken + this.leave_adjusted;
 		
 	}
@@ -42,8 +45,8 @@ class PermanentEmp extends Employee{
 	boolean avail_leave(int no_of_leaves, char type_of_leave) {
 		// TODO Auto-generated method stub
 		
-		this.avail_leaves = this.total_leaves-this.balance_leave;
-		if(this.balance_leave > no_of_leaves)
+		this.avail_leaves = this.total_leave_entitlement-this.balance_leave;
+		if(this.balance_leave < this.total_leave_entitlement)
 		{	
 			System.out.println("leaves are available."+this.avail_leaves);
 		}
@@ -57,22 +60,26 @@ class PermanentEmp extends Employee{
 	@Override
 	void calculate_salary() {
 		// TODO Auto-generated method stub
-		this.pf = this.basic_salary*(12/100);
-		this.hra = this.basic_salary*(50/100);
+		this.pf = basic_salary*0.12;
+		//System.out.println(this.pf);
+		this.hra = basic_salary*0.5;
 		this.total_salary = this.basic_salary + this.hra - this.pf;
 		
-		System.out.println("Details of Permanent employee :"+this.empName +" "+ "Employee ID :"+this.empId);
-		System.out.println("Salary of the Permanent employee is :"+this.total_salary);
+		System.out.println("Details of Permanent employee :"+"\nName :"+this.empName +" "+ "\nEmployee ID :"+this.empId);
+		System.out.println("Salary of the Permanent employee is :"+"\nbasic salary :"+this.basic_salary+" \ntotal salary :"+this.total_salary);
 		
 	}
 	
 	void print_leave_details(){
 		
-		System.out.println("Leaves details of Permanent employee :"+this.empName+ " "+ "Employee ID :"+this.empId);
+		System.out.println("Leaves details of Permanent employee :"+"\nName :"+this.empName+ " "+ "\nEmployee ID :"+this.empId);
 		System.out.println("Total leaves are :"+ this.total_leave_entitlement);
 		System.out.println("Total leaves are taken :"+this.leave_taken);
 		System.out.println("balance leaves are :"+this.balance_leave);
-		System.out.println("available leaves are :"+this.avail_leaves);
+		//System.out.println("available leaves are :"+this.avail_leaves);
+		System.out.println("sick leaves are :"+this.sick_leave);
+		System.out.println("available leaves are :"+this.paid_leave);
+		System.out.println("available leaves are :"+this.casual_leave);
 	}
 	
 }
@@ -84,7 +91,7 @@ class TemporaryEmp extends Employee{
     int avail_leaves;
 	
 
-	public TemporaryEmp(double basic_salary,String empName,int empId,int paid_leave,int sick_leave,int casual_leave,int total_leave_entitlement,int leave_adjusted)
+	public TemporaryEmp(double pf,double hra,double basic_salary,String empName,int avail_leaves,int empId,int paid_leave,int sick_leave,int casual_leave,int total_leave_entitlement,int leave_adjusted)
 	{	
 		this.empName = empName;
 		this.empId = empId;
@@ -95,12 +102,15 @@ class TemporaryEmp extends Employee{
 		this.leave_adjusted = leave_adjusted;
 		
 		this.basic_salary = basic_salary;
+		this.avail_leaves = avail_leaves;
+		this.pf = pf;
+		this.hra = hra;
 	}
 	
 	@Override
 	void calculate_balance_leaves() {
 		// TODO Auto-generated method stub
-		
+		this.leave_taken = this.sick_leave+this.casual_leave+this.paid_leave;
 		this.balance_leave = this.total_leave_entitlement - this.leave_taken + this.leave_adjusted;
 	}
 
@@ -108,10 +118,10 @@ class TemporaryEmp extends Employee{
 	boolean avail_leave(int no_of_leaves, char type_of_leave) {
 		// TODO Auto-generated method stub
 		
-		this.avail_leaves = this.total_leaves-this.balance_leave;
-		if(this.balance_leave > no_of_leaves)
+		this.avail_leaves = this.total_leave_entitlement - this.balance_leave;
+		if(this.balance_leave < this.total_leave_entitlement)
 		{	
-			System.out.println("leave is available." +this.avail_leaves);
+			System.out.println("leaves are available." +this.avail_leaves);
 		}
 		else{
 			System.out.println("leaves are not available.");
@@ -123,32 +133,37 @@ class TemporaryEmp extends Employee{
 	@Override
 	void calculate_salary() {
 		// TODO Auto-generated method stub
-		this.pf = this.basic_salary*(12/100);
-		this.hra = this.basic_salary*(50/100);
+		this.pf = basic_salary*0.12;
+		
+		this.hra = basic_salary*0.5;
 		this.total_salary = this.basic_salary + this.hra - this.pf;
-		System.out.println("Details of Temporary employee :"+"Name :"+this.empName +" "+ "Employee ID :"+this.empId);
-		System.out.println("Salary of the Temporary employee is :"+this.total_salary);
+		System.out.println("Details of Temporary employee :\n"+"Name :"+this.empName +" "+ "\nEmployee ID :"+this.empId);
+		System.out.println("Salary of the Temporary employee is :"+"\nbasic salary :"+this.basic_salary+" \ntotal salary :"+this.total_salary);
 	}
 	
 	void print_leave_details(){
-		System.out.println("Leaves details of Temporary employee :"+"Name :"+this.empName+ " "+ "Employee ID :"+this.empId);
+		System.out.println("Leaves details of Temporary employee :"+"\n  Name :" +this.empName+ " "+ "\nEmployee ID :"+this.empId);
 		System.out.println("Total leaves are :"+ this.total_leave_entitlement);
 		System.out.println("Total leaves are taken :"+this.leave_taken);
 		System.out.println("balance leaves are :"+this.balance_leave);
-		System.out.println("available leaves are :"+this.avail_leaves);
+		//System.out.println("available leaves are :"+this.avail_leaves);
+		System.out.println("sick leaves are :"+this.sick_leave);
+		System.out.println("available leaves are :"+this.paid_leave);
+		System.out.println("available leaves are :"+this.casual_leave);
 	}
 	
 }
  class EmployeeRecord{
 	 public static void main(String[] args)
 	 {
-		 PermanentEmp p = new PermanentEmp(27000.0,"Chandan",7,2,1,1,10,0);
+		 PermanentEmp p = new PermanentEmp(0,0,27000.0,"Chandan",0,7,2,1,1,10,0);
 		 p.calculate_balance_leaves();
 		 p.calculate_salary();
 		 p.print_leave_details();
 		 p.avail_leave(0,'p');
 		 
-		 TemporaryEmp t = new TemporaryEmp(20000.0,"Chandan",7,2,1,1,10,0);
+		 System.out.println("***************************");
+		 TemporaryEmp t = new TemporaryEmp(0,0,20000.0,"Raja",0,8,2,1,1,10,0);
 		 t.calculate_balance_leaves();
 		 t.calculate_salary();
 		 t.print_leave_details();
