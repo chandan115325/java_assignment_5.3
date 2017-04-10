@@ -48,7 +48,7 @@ class PermanentEmp extends Employee{
 		this.avail_leaves = this.total_leave_entitlement-this.balance_leave;
 		if(this.balance_leave < this.total_leave_entitlement)
 		{	
-			System.out.println("leaves are available."+this.avail_leaves);
+			System.out.println("leaves are available :"+this.avail_leaves);
 		}
 		else{
 			System.out.println("leaves are not available.");
@@ -76,10 +76,10 @@ class PermanentEmp extends Employee{
 		System.out.println("Total leaves are :"+ this.total_leave_entitlement);
 		System.out.println("Total leaves are taken :"+this.leave_taken);
 		System.out.println("balance leaves are :"+this.balance_leave);
-		//System.out.println("available leaves are :"+this.avail_leaves);
+		
 		System.out.println("sick leaves are :"+this.sick_leave);
-		System.out.println("available leaves are :"+this.paid_leave);
-		System.out.println("available leaves are :"+this.casual_leave);
+		System.out.println("paid leaves are :"+this.paid_leave);
+		System.out.println("casual leaves are :"+this.casual_leave);
 	}
 	
 }
@@ -121,7 +121,7 @@ class TemporaryEmp extends Employee{
 		this.avail_leaves = this.total_leave_entitlement - this.balance_leave;
 		if(this.balance_leave < this.total_leave_entitlement)
 		{	
-			System.out.println("leaves are available." +this.avail_leaves);
+			System.out.println("leaves are available :" +this.avail_leaves);
 		}
 		else{
 			System.out.println("leaves are not available.");
@@ -146,10 +146,10 @@ class TemporaryEmp extends Employee{
 		System.out.println("Total leaves are :"+ this.total_leave_entitlement);
 		System.out.println("Total leaves are taken :"+this.leave_taken);
 		System.out.println("balance leaves are :"+this.balance_leave);
-		//System.out.println("available leaves are :"+this.avail_leaves);
+		
 		System.out.println("sick leaves are :"+this.sick_leave);
-		System.out.println("available leaves are :"+this.paid_leave);
-		System.out.println("available leaves are :"+this.casual_leave);
+		System.out.println("paid leaves are :"+this.paid_leave);
+		System.out.println("casual leaves are :"+this.casual_leave);
 	}
 	
 }
