@@ -48,7 +48,7 @@ class PermanentEmp extends Employee{
 		this.avail_leaves = this.total_leave_entitlement-this.balance_leave;
 		if(this.balance_leave < this.total_leave_entitlement)
 		{	
-			System.out.println("leaves are available :"+this.avail_leaves);
+			System.out.println("leaves are available.");
 		}
 		else{
 			System.out.println("leaves are not available.");
@@ -121,7 +121,7 @@ class TemporaryEmp extends Employee{
 		this.avail_leaves = this.total_leave_entitlement - this.balance_leave;
 		if(this.balance_leave < this.total_leave_entitlement)
 		{	
-			System.out.println("leaves are available :" +this.avail_leaves);
+			System.out.println("leaves are available ." );
 		}
 		else{
 			System.out.println("leaves are not available.");
